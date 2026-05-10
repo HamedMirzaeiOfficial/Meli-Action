@@ -49,8 +49,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg bc rar
 
-      # OPTIONAL:
-      # اگر cookies داری اینو فعال کن
+      # OPTIONAL: اگر cookies داری اینو فعال کن
       #
       # - name: Create cookies file
       #   run: |
@@ -190,4 +189,9 @@ jobs:
 
           git commit -m "Add downloaded video(s)"
 
-          git push
+          # Fetch latest changes from remote and rebase to avoid push rejection
+          git fetch origin main
+          git rebase origin/main
+
+          # Push the rebased commit
+          git push origin main
